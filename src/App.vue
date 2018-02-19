@@ -127,4 +127,37 @@ export default {
     /* Support for IE. */
     font-feature-settings: 'liga';
   }
+
+  .VueCarousel-wrapper {
+    height: 226px !important;
+  }
+
+  .VueCarousel-dot-container {
+    display: none !important;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #9b9b9b;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #9b9b9b;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #9b9b9b;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #9b9b9b;
+  }
+
+  input {
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+
+  @media screen and (min-width: 576px) {
+    .VueCarousel-wrapper {
+      height: 413px !important;
+    }
+  }
 </style>
