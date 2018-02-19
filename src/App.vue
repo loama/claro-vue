@@ -3,6 +3,9 @@
     <div class="content">
       <router-view/>
     </div>
+    <div class="navbar">
+      <img src="./assets/logo.svg" class="logo">
+    </div>
     <div id="bottonNav">
       <div class="nav">
         <i class="material-icons">home</i>
@@ -44,6 +47,7 @@ export default {
 
   #app {
     font-family: 'Avenir-Next-Rounded-Regular';
+    overflow-x: hidden;
   }
 
   .content {
@@ -58,7 +62,7 @@ export default {
     height: 44px;
     width: 100vw;
     background: white;
-    box-shadow: 0 -1px 3px 0 rgba(136,136,136, 0.5);
+    box-shadow: 0 -1px 3px 0 rgba(136,136,136, 0.4);
   }
 
   .nav {
@@ -128,12 +132,20 @@ export default {
     font-feature-settings: 'liga';
   }
 
+  .VueCarousel {
+    pointer-events: none;
+  }
+
   .VueCarousel-wrapper {
     height: 226px !important;
   }
 
   .VueCarousel-dot-container {
     display: none !important;
+  }
+
+  .VueCarousel-slide {
+    position: relative;
   }
 
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -158,6 +170,28 @@ export default {
   @media screen and (min-width: 576px) {
     .VueCarousel-wrapper {
       height: 413px !important;
+    }
+
+    #bottonNav {
+      display: none;
+    }
+
+    .navbar {
+      display: block;
+      position: fixed;
+      z-index: 9000;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      min-width: 100%;
+      height: 48px;
+      background: white;
+      box-shadow: 0 1px 0 0 #e5e5e5;
+    }
+
+    .navbar .logo {
+      margin: 10px 16px;
+      height: 24px;
     }
   }
 </style>
