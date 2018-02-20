@@ -10,7 +10,7 @@
 
     <div class="whiteOverlay"></div>
 
-    <carousel :autoplay="true" :autoplayTimeout="5000" :perPage="1" :loop="true" v-on:pageChange="pageChange">
+    <carousel :autoplay="true" :autoplayTimeout="6000" :perPage="1" :loop="true" v-on:pageChange="pageChange">
       <slide v-for="slide in slider.items" v-bind:key="slide.group_id">
         <div style="margin-top:80px"> {{slide.title}} </div>
         <img class="cover" :src="slide.image_medium">
@@ -22,22 +22,27 @@
       <i class="material-icons">search</i>
     </div>
 
-    <div class="section">
+    <div class="section recommends" v-images-loaded:on.progress="imageProgress">
       <div class="title">Claro video te recomienda</div>
-      <div class="movie" v-for="movie in recommends"></div>
-    </div>
-
-    <div class="section" v-for="section in sections">
-      <div class="title">{{section.title}}</div>
-      <div class="movie" v-for="movie in section.content">
-        <img src="">
+      <div class="movie" v-for="movie in recommends.content" v-bind:key="movie.group_id">
+        <img :src="movie.image_large">
       </div>
     </div>
+
+    <div class="section" v-for="section in sections" v-bind:key="section.title">
+      <div class="title">{{section.title}}</div>
+      <div class="movie" v-for="movie in section.content" v-bind:key="movie.group_id">
+        <img :src="movie.image_medium">
+      </div>
+    </div>
+
+    <br>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import imagesLoaded from 'vue-images-loaded'
 import { Carousel, Slide } from 'vue-carousel'
 export default {
   components: {
@@ -52,10 +57,26 @@ export default {
         current: 0
       },
       recommends: [],
-      sections: []
+      sections: [],
+      imagesLoaded: 0
     }
   },
+  directives: {
+    imagesLoaded
+  },
   methods: {
+    imageProgress (instance, image) {
+      // const result = image.isLoaded ? 'loaded' : 'broken'
+      // console.log('image is ' + result + ' for ' + image.img.src)
+      this.imagesLoaded = this.imagesLoaded + 1
+      // console.log(this.imagesLoaded)
+      if (this.imagesLoaded > 5) {
+        document.getElementById('pageLoader').style.opacity = 0
+        setTimeout(function () {
+          document.getElementById('pageLoader').style.transform = 'translate3d(0, -3000px, 0)'
+        }, 1300)
+      }
+    },
     isCurrentPage (n) {
       return this.slider.current === n
     },
@@ -63,11 +84,11 @@ export default {
       // console.log(this.slider.length)
       // console.log(this.slider.current)
       var current = this.slider.current
-      if (this.slider.current <= this.slider.length) {
-        console.log('normal')
+      if (this.slider.current < this.slider.length - 1) {
+        // console.log('normal')
         this.slider.current = current + 1
       } else {
-        console.log('ends')
+        // console.log('ends')
         this.slider.current = 0
       }
       this.slider.current_id = this.slider.items[current].id
@@ -103,7 +124,7 @@ export default {
           content: response.data.response.groups
         }
 
-        self.recommends.push(section)
+        self.recommends = section
       })
       .catch(e => {
         console.log(e)
@@ -185,7 +206,7 @@ export default {
     background-size: cover;
     background-position: top left;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.5s;
   }
 
   .background.active {
@@ -253,7 +274,7 @@ export default {
   }
 
   .section .title {
-    font-size: 12px;
+    font-size: 16px;
     padding: 4px;
     color: #9b9b9b;
   }
@@ -265,6 +286,16 @@ export default {
     background-color: #d8d8d8;
     box-shadow: 0 1px 3px 0 rgba(136, 136, 136, 0.5);
     margin-left: 4px;
+  }
+
+  .section img {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .section.recommends .movie {
+    height: 251px;
+    width: 446px;
   }
 
   .navbar {

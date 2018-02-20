@@ -6,9 +6,92 @@
     <meta name="theme-color" content="#FC444C">
     <link rel="shortcut icon" href="/static/claro-favicon.png">
     <title>Claro | Vue Proposal | Jaime Lopez</title>
+    <style>
+      /* PRELOADER */
+
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        min-width: 100%;
+        min-height: 100%;
+        background: white;
+        z-index: 10001;
+        transition: opacity 2s;
+      }
+
+      .loader .logo {
+        position: absolute;
+        top: 240px;
+        left: calc(50vw - 80px);
+      }
+      .preloader-1 {
+        margin: 30vh auto 0;
+        width: 66px;
+        height: 12px;
+        white-space: nowrap;
+      }
+
+      .preloader-1 .line {
+        width: 1px;
+        height: 12px;
+        background: #D93025;
+        margin: 0 2px;
+        display: inline-block;
+        animation: opacity-1 1000ms infinite ease-in-out;
+      }
+
+      .preloader-1 .line-1 { animation-delay: 800ms; }
+      .preloader-1 .line-2 { animation-delay: 600ms; }
+      .preloader-1 .line-3 { animation-delay: 400ms; }
+      .preloader-1 .line-4 { animation-delay: 200ms; }
+      .preloader-1 .line-6 { animation-delay: 200ms; }
+      .preloader-1 .line-7 { animation-delay: 400ms; }
+      .preloader-1 .line-8 { animation-delay: 600ms; }
+      .preloader-1 .line-9 { animation-delay: 800ms; }
+
+      @keyframes opacity-1 {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
+    <div class="loader" id="pageLoader">
+      <img class="logo" src="static/logo.svg"></img>
+      <div class="preloader-1">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+        <span class="line line-4"></span>
+        <span class="line line-5"></span>
+        <span class="line line-6"></span>
+        <span class="line line-7"></span>
+        <span class="line line-8"></span>
+        <span class="line line-9"></span>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
+  <!-- Hotjar Tracking Code for claro-vue.firebaseapp.com -->
+  <script>
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:786576,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
 </html>

@@ -165,6 +165,7 @@ export default {
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
+    -webkit-appearance: none;
   }
 
   @media screen and (min-width: 576px) {
